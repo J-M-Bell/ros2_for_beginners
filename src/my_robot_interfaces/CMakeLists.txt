@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 project(my_robot_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -8,11 +8,17 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
+
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/CreateFolder.srv"
-  "srv/SetLed.srv
-  msg/LedPanel.msg"
- )
+  "srv/SetLed.srv"
+  "srv/CatchTurtle.srv"
+  "msg/LedPanelState.msg"
+  "msg/Turtle.msg"
+  "msg/TurtleArray.msg"
+)
+
+
 ament_export_dependencies(rosidl_default_runtime)
 
 ament_package()

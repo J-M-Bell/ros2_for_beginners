@@ -1,5 +1,8 @@
 #include "rclcpp/rclcpp.hpp"
 
+/**
+ * A simple node that prints a message to the console every second.
+ */
 class MyNode : public rclcpp::Node
 {
 public:
@@ -10,12 +13,16 @@ public:
                                          std::bind(&MyNode::timerCallback, this));
     }
 private:
+    /**
+     * A callback function that prints a message to the console every second.
+     */
     void timerCallback()
     {
         RCLCPP_INFO(this->get_logger(), "Hello %d", counter_);
         counter_++;
     }
 
+    // Member variables
     rclcpp::TimerBase::SharedPtr timer_;
     int counter_;
 };

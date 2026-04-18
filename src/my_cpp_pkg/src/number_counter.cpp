@@ -31,6 +31,11 @@ public:
     }
 
 private:
+    /**
+     * A callback function that receives a number from the 'number' topic, 
+     * adds to it the value of the counter multiplied by 2,
+     * and publishes the result to the 'number_count' topic. 
+     */
     void callbackNumbers(const example_interfaces::msg::Int64::SharedPtr msg)
     {
         auto msgNumber = example_interfaces::msg::Int64();
@@ -38,10 +43,13 @@ private:
         msg->data = newNumber_ + (counter_ * 2);
         counter_++;
         msgNumber.data = msg->data;
-        // publishNewNumber(msg);
         publisher_->publish(msgNumber);
     }
 
+    /**
+     * A callback function that resets the counter to 0 if the request data is true,
+     * and sends a response message indicating whether the counter was reset or not.
+     */
     void callbackResetCounter(const example_interfaces::srv::SetBool::Request::SharedPtr request,
                               const example_interfaces::srv::SetBool::Response::SharedPtr response)
     {
@@ -58,6 +66,8 @@ private:
         }
         RCLCPP_INFO(this->get_logger(), "%s", response->message.c_str());
     }
+
+    // Member variables
     rclcpp::Subscription<example_interfaces::msg::Int64>::SharedPtr subscriber_;
     rclcpp::Publisher<example_interfaces::msg::Int64>::SharedPtr publisher_;
     rclcpp::Service<example_interfaces::srv::SetBool>::SharedPtr server_;
