@@ -1,0 +1,21 @@
+<launch>
+    <let name="urdf_path" 
+         value="$(find-pkg-share my_robot_description)/urdf/my_robot.urdf.xacro" />
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" name="robot_state_publisher">
+        <param from="$(find-pkg-share my_robot_bringup)/config/gazebo_launch.yaml" />
+    </node>
+
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name="gz_args" value="empty.sdf -r" />
+    </include>
+
+    <node pkg="ros_gz_sim" exec="create" name="create">
+        <param from="$(find-pkg-share my_robot_bringup)/config/gazebo_launch.yaml" />
+    </node>
+
+    <node pkg="rviz2" exec="rviz2" name="rviz2">
+        <param from="$(find-pkg-share my_robot_bringup)/config/gazebo_launch.yaml" />
+    </node>
+
+</launch>

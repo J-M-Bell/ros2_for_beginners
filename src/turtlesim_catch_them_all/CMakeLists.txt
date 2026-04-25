@@ -20,11 +20,15 @@ ament_target_dependencies(turtle_controller rclcpp turtlesim geometry_msgs my_ro
 add_executable(turtle_spawner src/turtle_spawner.cpp)
 ament_target_dependencies(turtle_spawner rclcpp turtlesim my_robot_interfaces)
 
+add_executable(running_turtle_controller src/running_turtle_controller.cpp)
+ament_target_dependencies(running_turtle_controller rclcpp turtlesim geometry_msgs my_robot_interfaces)
+
 
 # targets for install folder
 install(TARGETS
   turtle_controller
   turtle_spawner
+  running_turtle_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 
