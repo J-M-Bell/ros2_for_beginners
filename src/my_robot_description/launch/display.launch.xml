@@ -1,16 +1,17 @@
 <launch>
+     <!-- Define paths to URDF and Gazebo config -->
     <let name="urdf_path" 
          value="$(find-pkg-share my_robot_description)/urdf/my_robot.urdf.xacro" />
-    <!-- <let name="urdf_path" 
-         value="$(find-pkg-share my_robot_description)/urdf/standalone_arm.urdf.xacro" /> -->
 
+     <!-- Publish the robot description to robot_state_publisher -->
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description"
                value="$(command 'xacro $(var urdf_path)')" />
     </node>
 
+     <!-- Run the joint_state_publisher_gui to allow interactive control of the robot's joints -->
     <node pkg="joint_state_publisher_gui" exec="joint_state_publisher_gui" />
-
+     
+     <!-- RViz2 Visualization -->
     <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(find-pkg-share my_robot_description)/rviz/my_robot_config.rviz"/>
-    <!-- <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(find-pkg-share my_robot_description)/rviz/my_robot_arm_config.rviz"/> -->
 </launch>

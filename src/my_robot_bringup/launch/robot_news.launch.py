@@ -4,6 +4,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     ld = LaunchDescription()
 
+    # Define the robot news station nodes with different robot names
     robot_news_station_R2D2 = Node(
         package="my_py_pkg",
         executable="robot_news_station",
@@ -39,12 +40,14 @@ def generate_launch_description():
         parameters=[{"robot_name": "Abraham"}]
     )
 
+    # Define the smartphone node
     smartphone = Node(
         package="my_py_pkg",
         executable="smartphone",
         name="smartphone"
     )
-
+    
+    # Add all nodes to the launch description
     ld.add_action(robot_news_station_R2D2)
     ld.add_action(robot_news_station_C3PO)
     ld.add_action(robot_news_station_Sunny)

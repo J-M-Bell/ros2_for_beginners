@@ -1,4 +1,5 @@
 <launch>
+     <!-- Define the robot news station nodes with different robot names -->
     <node pkg="my_py_pkg" exec="robot_news_station" name="robot_news_station_r2d2">
         <param name="robot_name" value="R2D2"/>
     </node>
@@ -14,5 +15,7 @@
     <node pkg="my_py_pkg" exec="robot_news_station" name="robot_news_station_abraham">
         <param name="robot_name" value="Abraham"/>
     </node>
+
+    <!-- Define the smartphone node -->
     <node pkg="my_py_pkg" exec="smartphone" name="smartphone"/>
 </launch>

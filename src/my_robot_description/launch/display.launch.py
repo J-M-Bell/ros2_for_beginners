@@ -12,8 +12,10 @@ def generate_launch_description():
     # Define the path to the URDF file
     urdf_file = os.path.join(pkg_share, 'urdf', 'my_robot.urdf.xacro')
 
+    #Set up the robot description parameter by processing the xacro file
     robot_description = ParameterValue(Command(['xacro ', urdf_file]), value_type=str)
 
+    # Start the robot_state_publisher node to publish the robot's state to TF
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -24,12 +26,11 @@ def generate_launch_description():
         }]
     )
 
+    # Run the joint_state_publisher_gui to allow interactive control of the robot's joints
     joint_state_publisher_gui_node = Node(
         package='joint_state_publisher_gui',
         executable='joint_state_publisher_gui',
     )
-
-
 
     # Create a Node action to launch RViz2 with the robot description
     rviz_node = Node(

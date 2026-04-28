@@ -4,6 +4,7 @@
     <xacro:property name="camera_width" value="0.1" />
     <xacro:property name="camera_height" value="0.05" />
 
+<!-- Camera Link and Joint -->
     <link name="camera_link">
         <visual>
             <geometry>
@@ -20,7 +21,6 @@
         </collision>
         <xacro:box_inertia m="5.0" x="${camera_length}" y="${camera_width}" z="${camera_height}"
             o_xyz="${camera_length/2.0} 0 0" o_rpy="0 0 0" />
-
     </link>
 
     <joint name="base_camera_joint" type="fixed">
@@ -29,6 +29,7 @@
         <origin xyz="${base_length/2.0} 0 ${base_height/2.0}" rpy="0 0 0"/>
     </joint>
 
+<!-- Gazebo Camera Sensor -->
     <gazebo reference="camera_link">
         <sensor name="camera" type="camera">
             <camera>
@@ -56,4 +57,6 @@
             <topic>camera/image_raw</topic>            
         </sensor>
     </gazebo>
+
+    
 </robot>
